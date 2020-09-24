@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <title>Material Design for Bootstrap</title>
+  <!-- MDB icon -->
+  <link rel="icon" href="img/mdb-favicon.ico" type="image/x-icon">
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.11.2/css/all.css">
+  <!-- Google Fonts Roboto -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap">
+  <!-- Bootstrap core CSS -->
+  <link rel="stylesheet" href="css/bootstrap.min.css">
+  <!-- Material Design Bootstrap -->
+  <link rel="stylesheet" href="css/mdb.min.css">
+  <!-- Your custom styles (optional) -->
+  <link rel="stylesheet" href="css/payment.css">
+</head>
+<body>
+
+  <!-- Start your project here-->  
+  <div id="wrapper">
+    <div class="payment">
+      <div class="payment_tour">
+        <div>
+          <h2>Ladakh 9nights/10days tour</h2>
+          <div class="cost">
+            Rs 65,000
+          </div>
+        </div>
+      </div>
+      <div class="payment_bill">
+        <h3>Receipt summary</h3>
+        <ul>
+          <li>
+            <span>65000 x 1 person</span>
+            <span>Rs 66000</span>
+          </li>
+          <li>
+            <span>Discount</span>
+            <span>Rs 2000</span>
+          </li>
+          <li>
+            <span>Subtotal</span>
+            <span>Rs 64000</span>
+          </li>
+          <li>
+            <span>Tax</span>
+            <span>Rs 1000</span>
+          </li>
+          <li>
+            <span>Total</span>
+            <span>Rs 65000</span>
+          </li>
+        </ul>
+        <hr>
+        <h3> Payment Information</h3>
+        <form action="/" class="payment_form">
+          <div class="form-input">
+            <input type="text" placeholder="Card Number" style="width:100%">
+          </div>
+          <div class="form-input">
+            <select>
+              <option>Month</option>
+            </select>
+            <select>
+              <option>Year</option>
+            </select>
+              <input type="text" placeholder="CVC"/>
+            </div>
+            <button type="submit">Book Now</button>
+          </form>
+        </div>
+    </div>
+  </div>
+
+  <!-- End your project here-->
+
+ <!-- jQuery -->
+ <script type="text/javascript" src="js/jquery.min.js"></script>
+ <!-- Bootstrap tooltips -->
+ <script type="text/javascript" src="js/popper.min.js"></script>
+ <!-- Bootstrap core JavaScript -->
+ <script type="text/javascript" src="js/bootstrap.min.js"></script>
+ <!-- MDB core JavaScript -->
+ <script type="text/javascript" src="js/mdb.min.js"></script>
+ <!-- DataTables  -->
+ <script type="text/javascript" src="js/addons/datatables.min.js"></script>
+ <!-- DataTables Select  -->
+ <script type="text/javascript" src="js/addons/datatables-select.min.js"></script>
+ <!-- Your custom scripts (optional) -->
+ <script type="text/javascript" src="js/index.js"></script>
+ <!-- Your custom scripts (optional) -->
+ <script type="text/javascript" src="js/agent.js"></script>
+ <script>
+
+   function dark(){
+   if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+       $('footer, .card').toggleClass('dark-card-admin');
+       $('body, .navbar').toggleClass('white-skin navy-green-skin');
+       $(this).toggleClass('white text-dark btn-outline-black');
+       $('body').toggleClass('dark-bg-admin');
+       $('h6, .card, p, td, th, i, li a, h4, input, label').not(
+         '#slide-out i, #slide-out a, .dropdown-item i, .dropdown-item').toggleClass('text-white');
+       $('.btn-dash').toggleClass('grey blue').toggleClass('lighten-3 darken-3');
+       $('.gradient-card-header').toggleClass('white black lighten-4');
+       $('.list-panel a').toggleClass('navy-blue-bg-a text-white').toggleClass('list-group-border');
+     }
+   }
+
+   window.onload=dark();
+
+     window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', function(e) { 
+       e.preventDefault();
+ 
+       $('footer, .card').toggleClass('dark-card-admin');
+       $('body, .navbar').toggleClass('white-skin navy-green-skin');
+       $(this).toggleClass('white text-dark btn-outline-black');
+       $('body').toggleClass('dark-bg-admin');
+       $('h6, .card, p, td, th, i, li a, h4, input, label').not(
+         '#slide-out i, #slide-out a, .dropdown-item i, .dropdown-item').toggleClass('text-white');
+       $('.btn-dash').toggleClass('grey blue').toggleClass('lighten-3 darken-3');
+       $('.gradient-card-header').toggleClass('white black lighten-4');
+       $('.list-panel a').toggleClass('navy-blue-bg-a text-white').toggleClass('list-group-border');
+     });
+     
+
+   $(function () {
+     $('#dark-mode').on('click', function (e) {
+ 
+       e.preventDefault();
+ 
+       $('footer, .card').toggleClass('dark-card-admin');
+       $('body, .navbar').toggleClass('white-skin navy-green-skin');
+       $(this).toggleClass('white text-dark btn-outline-black');
+       $('body').toggleClass('dark-bg-admin');
+       $('h6, .card, p, td, th, i, li a, h4, input, label').not(
+         '#slide-out i, #slide-out a, .dropdown-item i, .dropdown-item').toggleClass('text-white');
+       $('.btn-dash').toggleClass('grey blue').toggleClass('lighten-3 darken-3');
+       $('.gradient-card-header').toggleClass('white black lighten-4');
+       $('.list-panel a').toggleClass('navy-blue-bg-a text-white').toggleClass('list-group-border');
+ 
+     });
+   });
+ 
+ </script>
+
+</body>
+</html>

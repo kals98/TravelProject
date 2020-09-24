@@ -1,0 +1,277 @@
+<?php
+  include 'php/functions.php';
+  display_alert();
+  if (!isLoggedin()) {
+		$_SESSION['msg'] = "You are not logged in!";
+		header('location: index.html');
+  }
+  msg_unset();
+?>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <title>Material Design for Bootstrap</title>
+  <!-- MDB icon -->
+  <link rel="icon" href="img/ico/travelmeister.ico" type="image/x-icon">
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.11.2/css/all.css">
+  <!-- Bootstrap core CSS -->
+  <link rel="stylesheet" href="css/bootstrap.min.css">
+  <!-- Material Design Bootstrap -->
+  <link rel="stylesheet" href="css/mdb.min.css">
+  <!-- Your custom styles (optional) -->
+  <link rel="stylesheet" href="css/userdashboard.css">
+  <link rel="stylesheet" href="css/index.css">
+</head>
+<body>
+
+  <!-- Start your project here-->
+
+    <!--Navbar-->
+   <?php nav_display(); ?>
+  
+   
+    <!-- !navbar -->
+
+    <!-- Main layout -->
+    <main>
+
+      <div class="container pt-5 mt-5 mb-5">
+        <?php display_update_error(); ?>
+        <!-- Section: Edit Account -->
+        <section class="section">
+          <?php
+          $id=$_SESSION['user']['id'];
+          $qr_user = "SELECT * FROM users WHERE id='$id'";
+          $result = mysqli_query($db, $qr_user);
+          $row=mysqli_fetch_array($result);
+          $_SESSION['user']=$row;
+          ?>
+          <!-- First row -->
+          <div class="row">
+            <!-- First column -->
+            <div class="col-lg-4 mb-4">
+
+              <!-- Card -->
+              <div class="card card-cascade narrower">
+
+                <!-- Card image -->
+                <div class="view view-cascade gradient-card-header primary-color">
+                  <h5 class="mb-0 font-weight-bold black-text">Edit Photo</h5>
+                </div>
+                <!-- Card image -->
+
+                <!-- Card content -->
+
+                <div class="card-body card-body-cascade text-center">
+                  <img src="<?php user_show_img(); ?>" alt="User Photo" class="z-depth-1 mb-4 rounded-circle" height="150" width="150"/>
+                  <p class="text-muted"><small>Profile photo will be changed automatically</small></p>
+                  <div class="row flex-center">
+											<form method="POST" class="imgform" action="userdashboard.html" enctype="multipart/form-data">
+										<div class="file-field">
+	                    <div class="btn btn-info btn-rounded btn-sm btn-primary black-text">
+	                      <span>Choose new file</span>
+	                      <input type="file" id="pic" name="image">
+	                    </div>
+											<div class="file-path-wrapper">
+	                      <input class="file-path validate" type="text" placeholder="<?php echo $_SESSION['user']['image'];?>">
+	                    </div>
+											<p class="text-muted"><small>Jpg or jpeg max 500kb</small></p>
+										</div>
+										<button type="submit" name="upimg_btn" class="btn btn-info btn-rounded btn-sm btn-primary black-text">Uplaod photo</button><br>
+										</form>
+										<form method="POST" id ="imdformdel" action="userdashboard.html" enctype="multipart/form-data">
+                    <button  type="submit" name="delimg_btn" class="btn btn-danger btn-rounded btn-sm black-text">Delete</button>
+										</form>
+                  </div>
+                </div>
+
+                <!-- Card content -->
+
+              </div>
+              <!-- Card -->
+
+            </div>
+            <!-- First column -->
+
+            <!-- Second column -->
+            <div class="col-lg-8 mb-4">
+
+              <!-- Card -->
+              <div class="card card-cascade narrower">
+
+                <!-- Card image -->
+                <div class="view view-cascade gradient-card-header primary-color lighten-3">
+                  <h5 class="mb-0 font-weight-bold black-text">Edit Account</h5>
+                </div>
+                <!-- Card image -->
+
+                <!-- Card content -->
+                <div class="card-body card-body-cascade text-center">
+
+                  <!-- Edit Form -->
+                  <form action="userdashboard.html" method="post">
+                    <!-- First row -->
+
+                    <div class="row">
+
+                      <!-- First column -->
+                      <div class="col-md-6">
+                        <div class="md-form mb-0">
+                          <input type="text" id="form1" class="form-control validate" name="name" value="<?php display_name();?>" readonly="readonly">
+                          <label for="form1" data-error="wrong" data-success="right">Full Name</label>
+                        </div>
+                      </div>
+                      <!-- Second column -->
+                      <div class="col-md-6">
+                        <div class="md-form mb-0">
+                          <input type="text" id="form2" class="form-control validate" name="username" value="<?php display_uname();?>">
+                          <label for="form2" data-error="wrong" data-success="right">Username</label>
+                        </div>
+                      </div>
+                    </div>
+                    <!-- First row -->
+
+                    <!-- First row -->
+                    <div class="row">
+                      <!-- First column -->
+                      <div class="col-md-6">
+                        <div class="md-form mb-0">
+                          <input type="email" id="form81" class="form-control validate" name="email" value="<?php display_email();?>">
+                          <label for="form81" data-error="wrong" data-success="right">Your Email</label>
+                        </div>
+                      </div>
+
+                      <!-- Second column -->
+                      <div class="col-md-6">
+                        <div class="md-form mb-0">
+                          <input type="number" id="form82" class="form-control validate" name="phno" value="<?php display_phno();?>">
+                          <label for="form82" data-error="wrong" data-success="right">Your Phone No.</label>
+                        </div>
+                      </div>
+                    </div>
+                    <!-- First row -->
+
+                    <!-- Second row -->
+                    <div class="row">
+
+                      <!-- First column -->
+                      <div class="col-md-6">
+                        <div class="md-form mb-0">
+                          <input type="text" id="form76" class="form-control datepicker" name="dob" value="<?php display_dob();?>">
+                          <label for="form76">Your DOB</label>
+                        </div>
+                      </div>
+                      <!-- Second column -->
+
+											<div class="col-md-6">
+												<div class="md-form mb-0">
+													<input type="text" id="form80" name="user_type" class="form-control" value="<?php display_user_type();?>" disabled>
+													<label for="form80">User_Type</label>
+												</div>
+											</div>
+										</div>
+
+
+                    <!-- Second row -->
+
+                    <!-- Third row -->
+                    <div class="row">
+
+                      <!-- First column -->
+											<div class="col-md-6">
+												<div class="md-form mb-0 md-outline">
+													<input type="password" id="form77" class="form-control validate" name="password" autocomplete="off new-password" required>
+													<label for="form77" data-error="wrong" data-success="right">Current Password</label>
+												</div>
+											</div>
+
+                      <!-- Second column -->
+
+											<div class="col-md-6">
+												<div class="md-form mb-0 md-outline">
+													<input type="password" id="form79" class="form-control validate" name="password_2"  autocomplete="off new-password">
+													<label for="form79">New password</label>
+												</div>
+											</div>
+                    </div>
+                    <!-- Third row -->
+
+
+                    <!-- Fourth row -->
+                    <div class="row">
+                      <div class="col-md-12 text-center my-4">
+                        <input type="submit" name ="update_btn" value="Update Account" class="btn btn-info btn-rounded primary-color black-text">
+                      </div>
+                    </div>
+                    <!-- Fourth row -->
+
+                  </form>
+                  <!-- Edit Form -->
+
+                </div>
+                <!-- Card content -->
+
+              </div>
+              <!-- Card -->
+
+            </div>
+            <!-- Second column -->
+
+          </div>
+          <!-- First row -->
+
+        </section>
+        <!-- Section: Edit Account -->
+        <?php display_more();?>
+
+      </div>
+
+    </main>
+    <!-- Main layout -->
+
+    <!-- Footer -->
+    <?php display_footer(); ?>
+    <!-- Footer -->
+
+  <!-- End your project here-->
+
+<!-- jQuery -->
+<script type="text/javascript" src="js/jquery.min.js"></script>
+<!--Google Maps-->
+<script src="https://maps.google.com/maps/api/js"></script>
+<!-- Bootstrap tooltips -->
+<script type="text/javascript" src="js/popper.min.js"></script>
+<!-- Bootstrap core JavaScript -->
+<script type="text/javascript" src="js/bootstrap.min.js"></script>
+<!-- MDB core JavaScript -->
+<script type="text/javascript" src="js/mdb.min.js"></script>
+<!-- DataTables  -->
+<script type="text/javascript" src="js/addons/datatables.min.js"></script>
+<!-- DataTables Select  -->
+<script type="text/javascript" src="js/addons/datatables-select.min.js"></script>
+<!-- Your custom scripts (optional) -->
+<script type="text/javascript" src="js/index.js"></script>
+<!-- Your custom scripts (optional) -->
+<script type="text/javascript" src="js/agent.js"></script>
+  <script type="text/javascript">
+  $(document).ready(function(){
+    $(".imgform").submit(function(){
+      var fileName = $("#pic").val();
+  
+      if(fileName) { // returns true if the string is not empty
+              return true;
+      } else { // no file was selected
+          alert("no file selected");
+          return false; //<---- Add this line.
+      }
+     });
+      });
+
+  </script>
+
+</body>
+</html>

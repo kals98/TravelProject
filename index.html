@@ -1,0 +1,502 @@
+<?php
+  include 'php/functions.php';
+  display_alert();
+  msg_unset();
+  tourbook_unset();
+?>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <title>Travelmeister Tours</title>
+  <!-- MDB icon -->
+  <link rel="icon" href="img/ico/travelmeister.ico" type="image/x-icon">
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.11.2/css/all.css">
+  <!-- Google Fonts Roboto -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap">
+  <!-- MDBootstrap flags -->
+  <link rel="stylesheet" href="css/addons/flag.min.css">
+  <!-- Bootstrap core CSS -->
+  <link rel="stylesheet" href="css/bootstrap.min.css">
+  <!-- Material Design Bootstrap -->
+  <link rel="stylesheet" href="css/mdb.min.css">
+  <!-- Your custom styles (optional) -->
+  <link rel="stylesheet" href="css/index.css">
+</head>
+<body>
+  <!-- Start your project here-->
+    <!--Navbar-->
+    <?php nav_display(); ?>
+    <!--/.Navbar-->
+
+    <!--Mask-->
+    <div id="intro" class="view">
+
+        <div class="mask rgba-black-strong">
+
+            <div class="container-fluid d-flex align-items-center justify-content-center h-100">
+
+                <div class="row d-flex justify-content-center text-center">
+
+                    <div class="col-md-10">
+
+                        <!-- Heading -->
+                        <h2 class="display-4 font-weight-bold pt-5 mb-2 text-white">Welcome To TravelMeister Tours</h2>
+
+                        <!-- Divider -->
+                        <hr class="hr-light">
+
+                        <!-- Description -->
+                        <h4 class="my-4 text-white">Where Your Travel Dreams are Fulfilled!!!</h4>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+    <!--/.Mask-->
+
+
+<!--Main Navigation-->
+
+<!--Main layout-->
+<main class="">
+  <div class="container">
+			<!--Section: Tour place and Dates-->
+			<section id="search" class="text-center pt-5 mb-2">
+        
+					<!-- Heading -->
+					<h2 class="text-center h1 ">Select Place and Dates</h2>
+					<form action="tours.html" method="POST">
+					<!--Grid row-->
+					<div class="row d-flex justify-content-center mb-4">
+
+						<!--Grid column-->
+							 <div class="col-md-4 mb-4">
+								 <div class="form-group">
+                  <label><i class="fas fa-globe"></i>Country</label>
+                    <select id="country" name="country" class="custom-select form-control" placeholder="Enter Country of tour" required>
+                      <?php show_country(); ?>
+                    </select>
+								 </div>
+							 </div>
+							 <!--Grid column-->
+
+						<!--Grid column-->
+
+					     <div class="col-md-4 mb-4">
+					       <div class="form-group">
+                   <!--The "from" Date Picker -->
+                   <label><i class="fas fa-calendar"></i>Checkin</label>
+					         <input placeholder="Selected CheckIn date" type="text" id="checkin" name='sdate' class="form-control datepicker sdate" required>
+					       </div>
+					     </div>
+					     <!--Grid column-->
+
+					     <!--Grid column-->
+					     <div class="col-md-4 mb-4">
+					       <div class="form-group">
+                   <!--The "to" Date Picker -->
+                   <label><i class="fas fa-calendar"></i>Checkout</label>
+					         <input placeholder="Selected CheckOut date" type="text" id="checkout" name='edate' class="form-control datepicker edate" required>
+					       </div>
+					     </div>
+					     <!--Grid column-->
+
+					</div>
+					<!--Grid row-->
+
+					<!--Grid row-->
+						<div class="row d-flex justify-text-center mb-4">
+							<!--Grid column-->
+							<div class="col-md-6 mb-4">
+
+								<div class="md-form md-outline">
+									<!--The "to" Date Picker -->
+									<button type="submit" name="search_btn" class="btn btn-primary waves-effect waves-light black-text">Search</button>
+								</div>
+
+              </div>
+            </form>
+              <!--Grid column-->
+              <div class="col-md-6 mb-4">
+                <form action="tours.html" method="POST">
+								<div class="md-form md-outline">
+									<!--The "to" Date Picker -->
+									<button type="submit" name="search_all_btn" class="btn btn-primary waves-effect waves-light black-text">ViewALL</button>
+                </div>
+              </form>
+              </div>
+							<!--Grid column-->
+							</div>
+						<!--Grid row-->
+			</section>
+			<!--Section: Tour place and Dates-->
+
+    <hr class="my-5">
+
+        <!--Section: Best Features-->
+        <section id="best-features" class="text-center pt-5 mb-2">
+
+            <!-- Heading -->
+            <h2 class="text-center h1">Best Features</h2>
+
+            <!--Grid row-->
+            <div class="row d-flex justify-content-center mb-4">
+
+                <!--Grid column-->
+                <div class="col-md-8">
+
+                    <!-- Description -->
+                    <h4><p class="text-center w-responsive mx-auto wow fadeIn" data-wow-delay="0.2s">
+                      The best place to Book your tours and plan your travel</p></h4>
+                </div>
+                <!--Grid column-->
+
+            </div>
+            <!--Grid row-->
+
+            <!--Grid row-->
+            <div class="row">
+
+                <!--Grid column-->
+                <div class="col-md-4 mb-5">
+                    <i class="fa fa-camera-retro fa-4x orange-text"></i>
+                    <h4 class="my-4 font-weight-bold">Experience</h4>
+                    <p class="grey-text"></p>
+                </div>
+                <!--Grid column-->
+
+                <!--Grid column-->
+                <div class="col-md-4 mb-1">
+                    <i class="fa fa-heart fa-4x orange-text"></i>
+                    <h4 class="my-4 font-weight-bold">Happiness</h4>
+                    <p class="grey-text"></p>
+                </div>
+                <!--Grid column-->
+
+                <!--Grid column-->
+                <div class="col-md-4 mb-1">
+                    <i class="fa fa-bicycle fa-4x orange-text"></i>
+                    <h4 class="my-4 font-weight-bold">Adventure</h4>
+                    <p class="grey-text"></p>
+                </div>
+                <!--Grid column-->
+
+            </div>
+            <!--Grid row-->
+
+        </section>
+        <!--Section: Best Features-->
+
+        <hr class="my-5">
+
+        <!--Section: Examples-->
+        <section id="examples" class="text-center pt-5 mb-2">
+
+            <!-- Heading -->
+            <h2 class="text-center mb-5 h1">Destinations</h2>
+
+            <!--Grid row-->
+            <div class="row">
+
+                <!--Grid column-->
+                <div class="col-lg-4 col-md-12 mb-4">
+
+                    <div class="view overlay z-depth-1-half">
+                        <img src="img/tour/asia.jpg" class="z-depth-1-half img-home" alt="Asia">
+                        <div class="mask rgba-white-slight"></div>
+                    </div>
+
+                    <h4 class="my-4 font-weight-bold">Asia</h4>
+                    <p class="grey-text">Explore the culturally diverse asian countries.</p>
+
+                </div>
+                <!--Grid column-->
+
+                <!--Grid column-->
+                <div class="col-lg-4 col-md-6 mb-4">
+
+                    <div class="view overlay z-depth-1-half">
+                        <img src="img/tour/aus.jpg" class="z-depth-1-half img-home" alt="Australia">
+                        <div class="mask rgba-white-slight"></div>
+                    </div>
+
+                    <h4 class="my-4 font-weight-bold">Australia</h4>
+                    <p class="grey-text">Explore the extremely diverse wild life.</p>
+
+                </div>
+                <!--Grid column-->
+
+                <!--Grid column-->
+                <div class="col-lg-4 col-md-6 mb-4">
+
+                    <div class="view overlay z-depth-1-half">
+                        <img src="img/tour/am.jpg" class="z-depth-1-half img-home" alt="North America">
+                        <div class="mask rgba-white-slight"></div>
+                    </div>
+
+                    <h4 class="my-4 font-weight-bold">North America</h4>
+                    <p class="grey-text">Explore the high life.</p>
+
+                </div>
+                <!--Grid column-->
+
+            </div>
+            <!--Grid row-->
+
+            <!--Grid row-->
+            <div class="row">
+
+                <!--Grid column-->
+                <div class="col-lg-4 col-md-12 mb-4">
+
+                    <div class="view overlay z-depth-1-half">
+                        <img src="img/tour/sam.jpg" class="z-depth-1-half img-home" alt="South America">
+                        <div class="mask rgba-white-slight"></div>
+                    </div>
+
+                    <h4 class="my-4 font-weight-bold">South America</h4>
+                    <p class="grey-text">Explore the nature in South America</p>
+
+                </div>
+                <!--Grid column-->
+
+                <!--Grid column-->
+                <div class="col-lg-4 col-md-6 mb-4">
+
+                    <div class="view overlay z-depth-1-half">
+                        <img src="img/tour/eu.jpg" class="z-depth-1-half img-home" alt="Europe">
+                        <div class="mask rgba-white-slight"></div>
+                    </div>
+
+                    <h4 class="my-4 font-weight-bold">Europe</h4>
+                    <p class="grey-text">Explore the beautiful European cities</p>
+
+                </div>
+                <!--Grid column-->
+
+                <!--Grid column-->
+                <div class="col-lg-4 col-md-6 mb-4">
+
+                    <div class="view overlay z-depth-1-half">
+                        <img src="img/tour/af.jpg" class="z-depth-1-half img-home" alt="Africa">
+                        <div class="mask rgba-white-slight"></div>
+                    </div>
+
+                    <h4 class="my-4 font-weight-bold">Africa</h4>
+                    <p class="grey-text">Explore the diverse african continent</p>
+
+                </div>
+                <!--Grid column-->
+
+            </div>
+            <!--Grid row-->
+
+        </section>
+        <!--Section: Examples-->
+
+				<hr class="my-5">
+
+				<!--Section: Team-->
+				<section id="aboutus" class="text-center pt-5 mb-2">
+
+			<h2 class="text-center h1">About Us</h2>
+
+			<h4><p class="text-center w-responsive mx-auto wow fadeIn my-5" data-wow-delay="0.2s">We are a dedicated team of coders
+        driven by our common interests to make the world a better place.</p></h4>
+
+			<div class="row text-center wow fadeIn" data-wow-delay="0.4s">
+
+				<!-- First column -->
+				<div class="col-md-4 mb-5">
+
+					<div class="avatar mx-auto mb-4">
+
+						<img src="img/admin/kc.jpg" class="z-depth-1 img-fluid">
+
+					</div>
+
+					<h4>Kalash Chandak</h4>
+
+					<h5>Front End</h5>
+
+				</div>
+				<!-- First column -->
+
+				<!-- Second column -->
+				<div class="col-md-4 mb-5">
+
+					<div class="avatar mx-auto mb-4">
+
+						<img src="img/admin/pm.jfif" class="z-depth-1 img-fluid">
+
+					</div>
+
+					<h4>Pranita Maindargikar</h4>
+
+					<h5>Design</h5>
+
+				</div>
+				<!-- Second column -->
+
+				<!-- Third column -->
+				<div class="col-md-4 mb-5">
+
+					<div class="avatar mx-auto mb-4">
+
+						<img src="img/admin/hs.jpg" class="z-depth-1 img-fluid">
+
+					</div>
+
+					<h4>Haseeb Sediqi</h4>
+
+					<h5>Back End</h5>
+
+				</div>
+				<!-- Third column -->
+
+			</div>
+
+		</section>
+
+        <hr class="my-5">
+
+				<!--Section: Contact v.1 -->
+	      <section id="contact" class="text-center pt-5 mb-2">
+
+	        <!--Section heading -->
+	        <h2 class="text-center h1">Contact Us</h2>
+	        <!--Section description -->
+	        <h4><p class="text-center mb-5 w-responsive mx-auto pb-4">We will take 24 to 48 hours to reply.</p></h4>
+
+	        <div class="row">
+
+	          <!-- Grid column -->
+	          <div class="col-lg-5 mb-4">
+
+	            <!--Form with header -->
+	            <div class="card">
+
+	              <div class="card-body">
+	                <!--Header -->
+	                <div class="form-header primary-color accent-1">
+	                  <h3 class="black-text"><i class="fas fa-envelope black-text"></i> Write to us:</h3>
+	                </div>
+
+	                <p>We Hate Spammers</p>
+	                <br>
+
+                  <!--Body -->
+                  <form action="index.html" method="POST">
+	                <div class="md-form">
+	                  <input type="text" name="name" id="form-name" class="form-control" required>
+	                  <label for="form-name"><i class="fas fa-user"></i>Your name</label>
+	                </div>
+
+	                <div class="md-form">
+	                  <input type="email" name="email" id="form-email" class="form-control" required>
+	                  <label for="form-email"><i class="fas fa-envelope"></i>Your email</label>
+	                </div>
+
+	                <div class="md-form">
+	                  <input type="text" name="subject" id="form-Subject" class="form-control" required>
+	                  <label for="form-Subject"><i class="fas fa-tag"></i>Subject</label>
+	                </div>
+
+	                <div class="md-form">
+	                  <textarea type="text" name="message" id="form-text" class="md-textarea form-control" rows="3" required></textarea>
+	                  <label for="form-text"><i class="fas fa-pencil-alt"></i>Your message</label>
+	                </div>
+
+	                <div class="text-center mt-4">
+	                  <button type="submit" class="btn btn-primary black-text" name="contactus_btn">Submit</button>
+                  </div>
+                </form>
+
+	              </div>
+
+	            </div>
+	            <!--Form with header -->
+
+	          </div>
+	          <!-- Grid column -->
+
+	          <!-- Grid column -->
+	          <div class="col-lg-7">
+
+	            <!--Google map -->
+							<div id="map-container-google-2" class="z-depth-1-half map-container" style="height: 500px">
+									<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3783.246621066246!2d73.81268855072169!3d18.517754187348825!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bc2bfb9e53a05f9%3A0x2be5e8da02be693e!2sMIT%20World%20Peace%20University!5e0!3m2!1sen!2sin!4v1589017549207!5m2!1sen!2sin"
+									frameborder="0" style="border:0;" allowfullscreen></iframe>
+	            </div>
+
+	            <!--Google Maps -->
+
+
+	            <br>
+	            <!--Buttons -->
+	            <div class="row text-center">
+	              <div class="col-md-4">
+	                <a  href="https://g.page/mit-wpu?share" class="btn-floating primary-color accent-1"><i class="fas fa-map-marker-alt black-text"></i></a>
+	                <p>MIT-WPU, Pune</p>
+	                <p>MH 410038,India</p>
+	              </div>
+
+	              <div class="col-md-4">
+	                <a href="tel:+918879305922" class="btn-floating primary-color accent-1"><i class="fas fa-phone black-text"></i></a>
+	                <p><a href="tel:+918879305922" class="black-text">+918879305922</a></p>
+	                <p>Mon - Fri, 8:30-3:00</p>
+	              </div>
+
+	              <div class="col-md-4">
+	                <a href="mailto:travelmeistercare@gmail.com" class="btn-floating primary-color accent-1"><i class="fas fa-envelope black-text"></i></a>
+	                <p><a href="kalashchandak@gmail.com" class="black-text">kalashchandak@gmail.com</a></p>
+                  <p><a href="mailto:travelmeistercare@gmail.com" class="black-text">travelmeistercare@gmail.com</a></p>
+	              </div>
+	            </div>
+
+	          </div>
+	          <!-- Grid column -->
+
+	        </div>
+
+	      </section>
+	      <!--Section: Contact v.1 -->
+
+    </div>
+</main>
+<!--Main layout-->
+
+<!-- Footer -->
+<?php display_footer(); ?>
+<!-- Footer -->
+
+  <!-- End your project here-->
+<!-- jQuery -->
+<script type="text/javascript" src="js/jquery.min.js"></script>
+<!--Google Maps-->
+<script src="https://maps.google.com/maps/api/js"></script>
+<!-- Bootstrap tooltips -->
+<script type="text/javascript" src="js/popper.min.js"></script>
+<!-- Bootstrap core JavaScript -->
+<script type="text/javascript" src="js/bootstrap.min.js"></script>
+<!-- MDB core JavaScript -->
+<script type="text/javascript" src="js/mdb.min.js"></script>
+<!-- DataTables  -->
+<script type="text/javascript" src="js/addons/datatables.min.js"></script>
+<!-- DataTables Select  -->
+<script type="text/javascript" src="js/addons/datatables-select.min.js"></script>
+<!-- Your custom scripts (optional) -->
+<script type="text/javascript" src="js/index.js"></script>
+<!-- Your custom scripts (optional) -->
+<script type="text/javascript" src="js/agent.js"></script>
+</body>
+</html>

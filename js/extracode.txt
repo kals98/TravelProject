@@ -1,0 +1,204 @@
+<div class="table">
+    <?php
+    $query = "SELECT * FROM tours";
+    $query_run = mysqli_query($db, $query);
+    $i=0;
+    $j=0;
+    $rowcount=mysqli_num_rows($query_run);
+    ?>
+    <table class="table" id="datatableid" cellspacing="0" width="100%">
+      <thead>
+        <tr>
+          <th class="th-sm"></th>
+          <th class="th-sm"></th>
+          <th class="th-sm" ></th>
+          <th class="th-sm" ></th>
+          <th class="th-sm" ></th>
+          <th class="th-sm" ></th>
+        </tr>
+      </thead>
+      <tbody>
+      <?php
+      if($query_run)
+      {
+        while($j < $rowcount){
+        $i=0;
+        echo "<tr>";
+        while($row = mysqli_fetch_array($query_run) && $i < 3){
+        $i++;
+        $j++;
+
+      ?>
+        <td>       
+          <!-- Card-->
+          <div class="card card-ecommerce">
+
+            <!-- Card image-->
+            <div class="view overlay">
+
+              <img src="https://mdbootstrap.com/img/Photos/Horizontal/E-commerce/Products/13.jpg" class="img-fluid"
+                alt="">
+
+              <a>
+
+                <div class="mask rgba-white-slight"></div>
+
+              </a>
+
+            </div>
+            <!-- Card image-->
+
+            <!-- Card content-->
+            <div class="card-body">
+
+              <!-- Category & Title-->
+              <h5 class="card-title mb-1"><strong><a href="" class="dark-grey-text">iPhone</a></strong></h5><span
+                class="badge badge-danger mb-2">bestseller</span>
+
+              <!-- Rating-->
+
+
+              <!-- Card footer-->
+              <div class="card-footer pb-0">
+
+                <div class="row mb-0">
+
+                  <span class="float-left"><strong>1439$</strong></span>
+
+                  <span class="float-right">
+
+                    <a class="" data-toggle="tooltip" data-placement="top" title="Add to Cart"><i
+                        class="fas fa-shopping-cart ml-3"></i></a>
+
+                  </span>
+
+                </div>
+
+              </div>
+
+            </div>
+            <!-- Card content-->
+
+          </div> </td>  
+      <?php           
+    }
+    echo "</tr>";
+ }
+}
+ ?>
+
+</tbody>
+<tfoot>
+ <tr>
+   <th></th>
+   <th></th>
+   <th></th>
+   <th> </th>
+   <th></th>
+   <th></th>
+ </tr>
+</tfoot>
+</table>
+</div>
+
+</section>
+
+
+<hr class="my-5">
+
+        <!--Section: Gallery-->
+        <section id="gallery" class="text-center pt-5 mt-5">
+
+            <!-- Heading -->
+            <h2 class="text-center my-5 h1">Gallery heading</h2>
+
+            <!--Grid row-->
+            <div class="row">
+
+                <!--Grid column-->
+                <div class="col-md-6 mb-4">
+
+                    <!--Carousel Wrapper-->
+                    <div id="carousel-example-1z" class="carousel slide carousel-fade carousel-fade" data-ride="carousel">
+                        <!--Indicators-->
+                        <ol class="carousel-indicators">
+                            <li data-target="#carousel-example-1z" data-slide-to="0" class="active"></li>
+                            <li data-target="#carousel-example-1z" data-slide-to="1"></li>
+                            <li data-target="#carousel-example-1z" data-slide-to="2"></li>
+                        </ol>
+                        <!--/.Indicators-->
+                        <!--Slides-->
+                        <div class="carousel-inner z-depth-1-half" role="listbox">
+                            <!--First slide-->
+                            <div class="carousel-item active">
+                                <img class="d-block w-100" src="https://mdbootstrap.com/img/Photos/Slides/img%20(130).jpg"
+                                    alt="First slide">
+                            </div>
+                            <!--/First slide-->
+                            <!--Second slide-->
+                            <div class="carousel-item">
+                                <img class="d-block w-100" src="https://mdbootstrap.com/img/Photos/Slides/img%20(129).jpg"
+                                    alt="Second slide">
+                            </div>
+                            <!--/Second slide-->
+                            <!--Third slide-->
+                            <div class="carousel-item">
+                                <img class="d-block w-100" src="https://mdbootstrap.com/img/Photos/Slides/img%20(70).jpg"
+                                    alt="Third slide">
+                            </div>
+                            <!--/Third slide-->
+                        </div>
+                        <!--/.Slides-->
+                        <!--Controls-->
+                        <a class="carousel-control-prev" href="#carousel-example-1z" role="button" data-slide="prev">
+                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                            <span class="sr-only">Previous</span>
+                        </a>
+                        <a class="carousel-control-next" href="#carousel-example-1z" role="button" data-slide="next">
+                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                            <span class="sr-only">Next</span>
+                        </a>
+                        <!--/.Controls-->
+                    </div>
+                    <!--/.Carousel Wrapper-->
+
+                </div>
+                <!--Grid column-->
+
+                <!--Grid column-->
+                <div class="col-md-6">
+
+                    <!--Excerpt-->
+                    <a href="" class="teal-text">
+                        <h6 class="pb-1"><i class="fa fa-heart"></i><strong> Lifestyle </strong></h6>
+                    </a>
+                    <h4 class="mb-3"><strong>This is title of the news</strong></h4>
+                    <p>Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo minus id
+                        quod maxime
+                        placeat facere possimus, omnis voluptas assumenda est, omnis dolor repellendus et aut
+                        officiis
+                        debitis aut rerum.</p>
+
+                    <p>Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo minus id
+                        quod maxime
+                        placeat facere possimus, omnis voluptas assumenda est, omnis dolor repellendus et aut
+                        officiis
+                        debitis aut rerum.</p>
+                    <p>by <a><strong>Jessica Clark</strong></a>, 26/08/2016</p>
+                    <a class="btn btn-primary btn-md">Read more</a>
+
+                </div>
+                <!--Grid column-->
+
+            </div>
+            <!--Grid row-->
+
+        </section>
+        <!--Section: Gallery-->*/
+		
+		
+		    window.addEventListener('beforeunload', function (e) { 
+            e.preventDefault(); 
+            console.log(e);
+            e.returnValue = ''; 
+        }); 

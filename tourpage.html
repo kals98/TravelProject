@@ -1,0 +1,305 @@
+<?php
+  include 'php/functions.php';
+  if (!isset($_SESSION['tour']) and (!isset($_POST['tour_btn']))) {
+		$_SESSION['msg'] = "You must select tour";
+		header('location: tours.html');
+  }
+  display_alert();
+?>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <title>Tour Page</title>
+  <!-- MDB icon -->
+  <link rel="icon" href="img/ico/travelmeister.ico" type="image/x-icon">
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.11.2/css/all.css">
+  <!-- Bootstrap core CSS -->
+  <link rel="stylesheet" href="css/bootstrap.min.css">
+  <!-- Material Design Bootstrap -->
+  <link rel="stylesheet" href="css/mdb.min.css">
+  <!-- Your custom styles (optional) -->
+  <link rel="stylesheet" href="css/userdashboard.css">
+  <link rel="stylesheet" href="css/index.css">
+</head>
+<body>
+
+  <!-- Start your project here-->
+
+    <!--Navbar-->
+   <?php nav_display(); ?>
+    <!-- !navbar -->
+
+    <!-- Main layout -->
+    <main>
+      <div class="container mt-5 pt-3">
+
+        <!-- Section: product details -->
+        <section id="productDetails" class="pb-5">
+          <?php
+          $i=0;
+          if(isset($_POST['tour_btn'])){
+          $id=e($_POST['tour_id']);
+          $query = "SELECT * FROM tours WHERE id='$id'";
+          $query_run = mysqli_query($db, $query);
+          $row = mysqli_fetch_assoc($query_run);
+          $_SESSION['tour']=$row;
+          $img=explode(',',$row['image']);
+          $path="img/tour/".$row['id'];
+          }
+          elseif (isset($_SESSION['tour'])){
+            $id=$_SESSION['tour']['id'];
+            $query = "SELECT * FROM tours WHERE id='$id'";
+            $query_run = mysqli_query($db, $query);
+            $row = mysqli_fetch_assoc($query_run);
+            $_SESSION['tour']=$row;
+            $img=explode(',',$row['image']);
+            $path="img/tour/".$row['id'];
+          }
+          ?>
+          <!-- News card -->
+          <div class="card mt-5 hoverable">
+    
+            <div class="row mt-4">
+    
+              <div class="col-lg-6">
+
+                <!-- Carousel Wrapper -->
+                <div id="carousel-thumb" class="carousel slide carousel-fade carousel-thumbnails" data-ride="carousel">
+    
+                  <!-- Slides -->
+                  <div class="carousel-inner text-center text-md-left pl-4 pb-4" role="listbox">
+
+                     <?php if($img[0]!="default.jpg"){
+                       foreach($img as $value){
+                         if($i==0){
+                      ?>
+                      <div class="carousel-item active">
+                      <img src='<?php echo $path."/".$value; ?>' class="img-tour" alt="First slide1">
+                      </div>
+                      <?php 
+                        $i++;}
+                       else{ ?>
+                        <div class="carousel-item">
+                          <img src='<?php echo $path."/".$value; ?>' class="img-tour" alt="First slide1">
+                        </div>
+                    <?php
+                       }
+                       }}
+                      else{
+                        ?>
+                        <div class="carousel-item">
+                        <img src="img/tour/default.jpg" alt="First slide" class="img-tour">
+                        </div>
+                      <?php }
+                      ?>
+                  </div>
+                  <!-- Slides -->
+    
+                  <!-- Thumbnails -->
+                  <a class="carousel-control-prev" href="#carousel-thumb" role="button" data-slide="prev">
+    
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    
+                    <span class="sr-only">Previous</span>
+    
+                  </a>
+    
+                  <a class="carousel-control-next" href="#carousel-thumb" role="button" data-slide="next">
+    
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    
+                    <span class="sr-only">Next</span>
+    
+                  </a>
+                  <!-- Thumbnails -->
+    
+                </div>
+                <!-- Carousel Wrapper -->
+    
+              </div>
+              <div class="col-lg-5 mr-3 text-center text-md-left">
+
+                <h2 class="h2-responsive text-center text-md-left product-name font-weight-bold dark-grey-text mb-1 ml-xl-0 ml-4">
+    
+                  <strong class=""><?php echo $_SESSION['tour']['name']; ?></strong>
+    
+                </h2>
+                <?php display_star($_SESSION['tour']['rating']); ?>
+    
+                <h4 class="h3-responsive text-center text-md-left mb-5 ml-xl-0 ml-4 mt-4">
+
+                  <span class="red-text font-weight-bold ">
+    
+                    <strong class="red-text">Price:-</strong>
+    
+                  </span>
+    
+                  <span class="red-text font-weight-bold">
+    
+                    <strong class="red-text">RS.<?php echo $_SESSION['tour']['price']; ?></strong>
+    
+                  </span>
+                  <span class="grey-text">
+    
+                    <strong>/person</strong>
+    
+                  </span>
+    
+                </h4>
+    
+                <p class="ml-xl-0 ml-4">Description:-<?php echo $_SESSION['tour']['descr']; ?></p>
+    
+                <p class="ml-xl-0 ml-4">
+    
+                  <strong>Country: </strong><?php echo $_SESSION['tour']['country']; ?></p>
+    
+                <p class="ml-xl-0 ml-4">
+    
+                  <strong>Continent: </strong><?php echo $_SESSION['tour']['continent']; ?></p>
+    
+                <p class="ml-xl-0 ml-4">
+    
+                  <strong>Availability: </strong>Rooms Available</p>
+                             <!-- Add to Cart -->
+            <section class="color">
+
+                <div class="row mt-3 mb-4">
+
+                  <div class="col-md-12 text-center text-md-left text-md-right">
+                    <form action="checkout.html" method="POST">
+                    <input type="hidden" name="tour_id" value="<?php echo $_SESSION['tour']['id']; ?>" id="tour_id">
+
+                    <button type="submit" name="tour_btn" class="btn btn-primary btn-rounded">
+                      <i class="fas fa-cart-plus mr-2 black-text" aria-hidden="true"></i> Book Tour
+                    </button>
+
+                  </div>
+
+                </div>
+
+            </section>
+            <!-- Add to Cart -->
+    
+                </div>
+    
+            </div>
+    
+          </div>
+          <!-- News card -->
+    
+        </section>
+    
+        <!-- Product Reviews -->
+        <section id="reviews" class="pb-5 mt-4">
+    
+          <hr>
+    
+          <h4 class="h4-responsive dark-grey-text font-weight-bold my-5 text-center">
+    
+            <strong>Tour Reviews</strong>
+    
+          </h4>
+    
+          <hr class="mb-5">
+    
+          <!-- Main wrapper -->
+          <div class="comments-list text-center text-md-left">
+          <?php     
+          $qr = "SELECT * FROM reviews WHERE tour_id='$id'";
+          $qr_run = mysqli_query($db, $qr);
+          if(mysqli_num_rows($qr_run) > 0)
+          {
+              foreach($qr_run as $row)
+              {
+                $userid=$row['user_id'];
+                $qr_u = "SELECT * FROM users WHERE id='$userid'";
+                $qr_runu = mysqli_query($db, $qr_u);
+                $user = mysqli_fetch_assoc($qr_runu);
+          ?>
+            <!-- First row -->
+            <div class="row mb-5">
+    
+              <!-- Image column -->
+              <div class="col-sm-2 col-12 mb-3">
+    
+                <img src="img/profile/<?php echo $user['image'];?>" alt="sample image"
+                  class="avatar rounded-circle z-depth-1-half">
+    
+              </div>
+              <!-- Image column -->
+    
+              <!-- Content column -->
+              <div class="col-sm-10 col-12">
+    
+                <a>
+    
+                  <h5 class="user-name font-weight-bold"><?php echo $user['name'];?></h5>
+    
+                </a>
+    
+                <?php display_star($row['rating']); ?>
+    
+                <div class="card-data">
+    
+                  <ul class="list-unstyled mb-1">
+    
+                    <li class="comment-date font-small grey-text">
+    
+                      <i class="far fa-clock-o"></i><?php echo $row['date'];?></li>
+    
+                  </ul>
+    
+                </div>
+    
+                <p class="article"><?php echo $row['details'];?></p>
+    
+              </div>
+              <!-- Content column -->
+    
+            </div>
+            <!-- First row -->
+            <?php }
+            }else{
+              echo '<h3>No Review Yet</h3>';
+            }
+            ?>
+          </div>
+          <!-- Main wrapper -->
+    
+        </section>
+        <!-- Product Reviews -->
+    
+    </main>
+    <!-- Main layout -->
+
+    <!-- Footer -->
+    <?php display_footer(); ?>
+    <!-- Footer -->
+
+  <!-- End your project here-->
+
+<!-- jQuery -->
+<script type="text/javascript" src="js/jquery.min.js"></script>
+<!--Google Maps-->
+<script src="https://maps.google.com/maps/api/js"></script>
+<!-- Bootstrap tooltips -->
+<script type="text/javascript" src="js/popper.min.js"></script>
+<!-- Bootstrap core JavaScript -->
+<script type="text/javascript" src="js/bootstrap.min.js"></script>
+<!-- MDB core JavaScript -->
+<script type="text/javascript" src="js/mdb.min.js"></script>
+<!-- DataTables  -->
+<script type="text/javascript" src="js/addons/datatables.min.js"></script>
+<!-- DataTables Select  -->
+<script type="text/javascript" src="js/addons/datatables-select.min.js"></script>
+<!-- Your custom scripts (optional) -->
+<script type="text/javascript" src="js/index.js"></script>
+<!-- Your custom scripts (optional) -->
+<script type="text/javascript" src="js/agent.js"></script>
+
+</body>
+</html>

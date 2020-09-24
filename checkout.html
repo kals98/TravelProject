@@ -1,0 +1,317 @@
+<?php
+  include 'php/functions.php';
+  if (!isset($_SESSION['tour']) and (!isset($_POST['tour_btn']))) {
+		$_SESSION['msg'] = "Please select tour";
+		header('location: tours.html');
+  }
+  if (!isLoggedIn()) {
+		$_SESSION['msg'] = "You must log in first";
+		header('location: index.html');
+  }
+  display_alert();
+?>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <title>Checkout</title>
+  <!-- MDB icon -->
+  <link rel="icon" href="img/ico/travelmeister.ico" type="image/x-icon">
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.11.2/css/all.css">
+  <!-- Bootstrap core CSS -->
+  <link rel="stylesheet" href="css/bootstrap.min.css">
+  <!-- Material Design Bootstrap -->
+  <link rel="stylesheet" href="css/mdb.min.css">
+  <!-- Your custom styles (optional) -->
+  <link rel="stylesheet" href="css/userdashboard.css">
+  <link rel="stylesheet" href="css/index.css">
+</head>
+<body>
+
+  <!-- Start your project here-->
+
+    <!--Navbar-->
+   <?php nav_display(); ?>
+    <!-- !navbar -->
+
+    <main class="mt-5 mb-5">
+        <div class="container fadeIn">
+          <?php display_update_error(); ?>
+          <!-- Heading -->
+          <h2 class="my-5 h2 text-center">Checkout</h2>
+          <?php
+          if(isset($_POST['tour_btn'])){
+          $id=e($_POST['tour_id']);
+          $query = "SELECT * FROM tours WHERE id='$id'";
+          $query_run = mysqli_query($db, $query);
+          $row = mysqli_fetch_assoc($query_run);
+          $_SESSION['tour'] = $row;
+          }else{
+            $row=$_SESSION['tour'];
+          }
+          ?>
+          <!--Grid row-->
+          <div class="row">
+    
+            <!--Grid column-->
+            <div class="col-md-8 mb-4">
+    
+              <!--Card-->
+              <div class="card">
+    
+                <!--Card content-->
+                <form class="card-body" action="checkout.html" method="POST">
+    
+                  <!--Grid row-->
+                  <div class="row">
+    
+                    <!--Grid column-->
+                    <div class="col-md-12 mb-2">
+    
+                      <!--firstName-->
+                      <div class="md-form ">
+                        <input type="text" name="fullname" value="<?php display_name(); ?>" placeholder="abc" id="Name" class="form-control" required>
+                        <label for="Name" class="">Full Name</label>
+                      </div>
+    
+                    </div>
+                    <!--Grid column-->
+    
+                  </div>
+                  <!--Grid row-->
+    
+                  <!--email-->
+                  <div class="md-form mb-5">
+                    <input type="text" id="email" name="email" value="<?php display_email(); ?>" class="form-control" placeholder="youremail@example.com" required>
+                    <label for="email" class="">Email</label>
+                  </div>
+    
+                  <!--address-->
+                  <div class="md-form mb-5">
+                    <input type="text" id="address" class="form-control" name="addr" placeholder="1234 Main St" required>
+                    <label for="address" class="">Address</label>
+                  </div>
+    
+                  <!--Grid row-->
+                  <div class="row">
+    
+                    <!--Grid column-->
+                    <div class="col-lg-4 col-md-12 mb-4">
+    
+                      <label for="checkin"><i class="fas fa-calendar"></i>CheckIn</label>
+                      <input placeholder="Selected CheckIn date" type="text" value="<?php display_sdate(); ?>" id="checkin" name='sdate' class="form-control datepicker sdate" required>
+                    
+                    </div>
+                    <!--Grid column-->
+    
+                    <!--Grid column-->
+                    <div class="col-lg-4 col-md-6 mb-4">
+    
+                      <label for="checkout"><i class="fas fa-calendar"></i>CheckOut</label>
+                      <input placeholder="Selected CheckOut date" value="<?php display_edate(); ?>" type="text" id="checkout" name='edate' class="form-control datepicker edate" required>
+                    
+                    </div>
+                    <!--Grid column-->
+                    <!--Grid column-->
+                    <div class="col-lg-4 col-md-6 mb-4">
+    
+                      <label for="nop" class="pass-quantity">Number of People</label>
+                      <input type="number" name="nop" max="100" class="form-control" id="nop" placeholder="0" required>
+                      <div class="invalid-feedback">
+                        Number of people is required.
+                      </div>
+    
+                    </div>
+                    <!--Grid column-->
+                  </div>
+    
+                  <hr>
+    
+                  <div class="d-block my-3">
+                    <div class="custom-control custom-radio">
+                      <input id="credit" name="paymentMethod" type="radio" class="custom-control-input" checked required>
+                      <label class="custom-control-label" for="credit">Credit card</label>
+                    </div>
+                    <div class="custom-control custom-radio">
+                      <input id="debit" name="paymentMethod" type="radio" class="custom-control-input" required>
+                      <label class="custom-control-label" for="debit">Debit card</label>
+                    </div>
+                    <div class="custom-control custom-radio">
+                      <input id="ewallet" name="paymentMethod" type="radio" class="custom-control-input" required>
+                      <label class="custom-control-label" for="ewallet">Ewallet</label>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-6 mb-3">
+                      <label for="cc-name">Name on card</label>
+                      <input type="text" class="form-control" name="pmname" id="cc-name" placeholder="" required>
+                      <label class="text-muted">Full name as displayed on card</label>
+                      <div class="invalid-feedback">
+                        Name on card is required
+                      </div>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                      <label for="cc-number">Credit card number</label>
+                      <input type="number" class="form-control" min="1000000000000000" max="9999999999999999" name="pmnum" id="cc-number" placeholder="" required>
+                      <div class="invalid-feedback">
+                        Credit card number is required
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-3 mb-3">
+                      <label for="cc-exp">Expiration</label>
+                      <input type="text" class="form-control expdate" name="pmexp" id="cc-exp" required>
+                      <div class="invalid-feedback">
+                        Expiration date required
+                      </div>
+                    </div>
+                    <div class="col-md-3 mb-3">
+                      <label for="cc-expiration">CVV</label>
+                      <input type="number" class="form-control" min="100" max="999" name="cvv" id="cc-cvv" placeholder="" required>
+                      <div class="invalid-feedback">
+                        Security code required
+                      </div>
+                    </div>
+                  </div>
+                  <hr class="mb-4">
+                  <button class="btn btn-primary btn-lg btn-block black-text" name="checkout_btn" type="submit">Continue to checkout</button>
+    
+                </form>
+    
+              </div>
+              <!--/.Card-->
+    
+            </div>
+            <!--Grid column-->
+
+               <!--Grid column-->
+        <div class="col-md-4 mb-4">
+
+          <!-- Heading -->
+          <h4 class="d-flex justify-content-between align-items-center mb-3">
+            <span>Your cart</span>
+            <span class="badge badge-secondary badge-pill">1</span>
+          </h4>
+
+          <!-- Cart -->
+          <ul class="list-group mb-3 z-depth-1 black">
+            <li class="list-group-item d-flex justify-content-between lh-condensed">
+              <div>
+                <h6><?php echo $row['name']; ?></h6>
+                <small class="text-muted"><?php echo $row['country']; ?></small>
+              </div>
+              <span class="text-muted">Rs.<?php echo $row['price']; ?></span>
+            </li>
+          </ul>
+          <!-- Cart -->
+
+          <!-- Promo code -->
+          <form class="card p-2">
+            <div class="input-group">
+              <input type="text" class="form-control" placeholder="Promo code" name="coupon" aria-label="Recipient's username" aria-describedby="basic-addon2">
+              <div class="input-group-append">
+                <button class="btn btn-secondary btn-md waves-effect m-0" onclick="redeem();" type="button">Redeem</button>
+              </div>
+            </div>
+          </form>
+          <!-- Promo code -->
+
+        </div>
+        <!--Grid column-->
+    
+          </div>
+          <!--Grid row-->
+    
+        </div>
+      </main>
+      <!--Main layout-->
+
+    <!-- Footer -->
+    <?php display_footer(); ?>
+    <!-- Footer -->
+
+  <!-- End your project here-->
+
+ <!-- jQuery -->
+ <script type="text/javascript" src="js/jquery.min.js"></script>
+ <!--Google Maps-->
+ <script src="https://maps.google.com/maps/api/js"></script>
+ <!-- Bootstrap tooltips -->
+ <script type="text/javascript" src="js/popper.min.js"></script>
+ <!-- Bootstrap core JavaScript -->
+ <script type="text/javascript" src="js/bootstrap.min.js"></script>
+ <!-- MDB core JavaScript -->
+ <script type="text/javascript" src="js/mdb.min.js"></script>
+ <!-- DataTables  -->
+ <script type="text/javascript" src="js/addons/datatables.min.js"></script>
+ <!-- DataTables Select  -->
+ <script type="text/javascript" src="js/addons/datatables-select.min.js"></script>
+ <!-- Your custom scripts (optional) -->
+ <script type="text/javascript" src="js/index.js"></script>
+ <!-- Your custom scripts (optional) -->
+ <script type="text/javascript" src="js/agent.js"></script>
+  <script type="text/javascript">
+  $(document).ready(function() {
+
+    /* Set rates */
+    var taxRate = 0.05;
+    var fadeTime = 300;
+ 
+    /* Assign actions */
+    $('.pass-quantity input').change(function() {
+      updateQuantity(this);
+    });
+ 
+ 
+ 
+    /* Recalculate cart */
+    function recalculateCart() {
+      var subtotal = 0;
+ 
+      /* Sum up row totals */
+
+        subtotal = parseFloat($('#product-line-price').text());
+ 
+      /* Calculate totals */
+      var tax = subtotal * taxRate;
+      var total = subtotal + tax;
+ 
+      /* Update totals display */
+      $('.totals-value').fadeOut(fadeTime, function() {
+        $('#cart-subtotal').html(subtotal.toFixed(2));
+        $('#cart-tax').html(tax.toFixed(2));
+        $('.cart-total').html(total.toFixed(2));
+        if (total == 0) {
+          $('.checkout').fadeOut(fadeTime);
+        } else {
+          $('.checkout').fadeIn(fadeTime);
+        }
+        $('.totals-value').fadeIn(fadeTime);
+      });
+    }
+ 
+ 
+    /* Update quantity */
+    function updateQuantity(quantityInput) {
+      /* Calculate line price */
+      var price = parseFloat($('#product-line-price').text());
+      var quantity = $(quantityInput).val();
+      var linePrice = price * quantity;
+ 
+
+        $(this).fadeOut(fadeTime, function() {
+          $('.totals-value').text(linePrice.toFixed(2));
+          recalculateCart();
+          $(this).fadeIn(fadeTime);
+      });
+    }
+ 
+  });
+</script>
+
+</body>
+</html>

@@ -1,0 +1,165 @@
+<?php
+  include 'php/functions.php';
+  display_alert();
+  msg_unset();
+  if (isLoggedIn()) {
+		$_SESSION['msg'] = "You are already loggedin pls reset password form userdashboard";
+		header('location: userdashboard.html');
+	}
+?>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <title>Material Design for Bootstrap</title>
+  <!-- MDB icon -->
+  <link rel="icon" href="img/ico/travelmeister.ico" type="image/x-icon">
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.11.2/css/all.css">
+  <!-- Bootstrap core CSS -->
+  <link rel="stylesheet" href="css/bootstrap.min.css">
+  <!-- Material Design Bootstrap -->
+  <link rel="stylesheet" href="css/mdb.min.css">
+  <!-- Your custom styles (optional) -->
+  <link rel="stylesheet" href="css/index.css">
+</head>
+<body>
+
+  <!-- Start your project here-->
+
+    <!--Navbar-->
+   <?php nav_display(); ?>
+    <!-- !navbar -->
+
+    <!-- Main layout -->
+    <main>
+
+   <div class="container pt-5 mt-5 mb-5">
+	  <?php display_update_error(); ?>
+        <!-- Section: Edit Account -->
+        <section class="section">
+          <!-- First row -->
+          <div class="row">
+            <!-- First column -->
+            <div class="col-lg-12 mb-4">
+
+              <!-- Card -->
+              <div class="card card-cascade narrower">
+
+                <!-- Card image -->
+                <div class="view view-cascade gradient-card-header primary-color lighten-3">
+                  <h5 class="mb-0 font-weight-bold black-text">Forgot password form</h5>
+                </div>
+                <!-- Card image -->
+
+                <!-- Card content -->
+                <div class="card-body card-body-cascade">
+
+                  <!-- Edit Form -->
+                  <form id="forgot" name="forgot" action="forgot.html" method="post">
+                    <!-- First row -->
+                    <p class="h3 mt-3">Select otp receive method:-</p>
+
+                    <div class="row justify-content-md-left">
+                      
+
+                      <!-- First column -->
+                      <div class="col-md-6">
+                        <div class="form-group form-check mb-0">
+                          <input class="form-check-input" name="add" type="radio" id="radio1" value="phno">
+                          <label class="form-check-label" for="radio1">Phone no</label>
+                        </div>
+                      </div>
+
+
+                    <!-- Second column -->
+                    
+
+                      <div class="col-md-6">
+                        <div class="form-group form-check mb-0">
+                          <input class="form-check-input" name="add" type="radio" id="radio2" value="email">
+                          <label class="form-check-label" for="radio2">Email</label>
+                        </div>
+                      </div>
+                      </div>
+                    <!-- First row -->
+                    <p class="h3 mt-5">Enter your details:-</p>
+
+                    <div class="row justify-content-md-center">
+
+                    <div class="col-md-12">
+                      <div class="md-form mb-0 md-outline">
+                        <input type="text" id="form77" class="form-control" name="otp_add" >
+                        <label for="form77">Enter your Phone no/email</label>
+                      </div>
+                    </div>
+                    </div>
+
+                    <!-- Fourth row -->
+                    <div class="row">
+                      <div class="col-md-12 text-center my-4">
+                        <button type="submit" name ="otp_btn" class="btn btn-info btn-rounded bg-primary primary-color black-text">Send OTP</button>
+                      </div>
+                    </div>
+                    <!-- Fourth row -->
+
+                  </form>
+                  <!-- Edit Form -->
+
+                </div>
+                <!-- Card content -->
+
+              </div>
+              <!-- Card -->
+
+            </div>
+            <!-- Second column -->
+
+          </div>
+          <!-- First row -->
+
+        </section>
+        <!-- Section: Edit Account -->
+
+      </div>
+
+    </main>
+    <!-- Main layout -->
+
+    <!-- Footer -->
+    <?php display_footer(); ?>
+    <!-- Footer -->
+
+  <!-- End your project here-->
+
+ <!-- jQuery -->
+ <script type="text/javascript" src="js/jquery.min.js"></script>
+ <!-- Bootstrap tooltips -->
+ <script type="text/javascript" src="js/popper.min.js"></script>
+ <!-- Bootstrap core JavaScript -->
+ <script type="text/javascript" src="js/bootstrap.min.js"></script>
+ <!-- MDB core JavaScript -->
+ <script type="text/javascript" src="js/mdb.min.js"></script>
+ <!-- DataTables  -->
+ <script type="text/javascript" src="js/addons/datatables.min.js"></script>
+ <!-- DataTables Select  -->
+ <script type="text/javascript" src="js/addons/datatables-select.min.js"></script>
+ <!-- Your custom scripts (optional) -->
+ <script type="text/javascript" src="js/index.js"></script>
+ <!-- Your custom scripts (optional) -->
+ <script type="text/javascript" src="js/agent.js"></script>
+  <script type="text/javascript">
+  $("#forgot").submit(function(){
+      if($('#radio1').is(':checked') || $('#radio2').is(':checked')) { 
+        return true;
+      } else { // no option was selected
+        alert("No option selected");
+        return false; //<---- Add this line.
+    }
+     });
+  </script>
+
+</body>
+</html>
